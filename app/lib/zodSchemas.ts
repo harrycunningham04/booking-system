@@ -22,9 +22,20 @@ export function onBoardingSchemaValidation (options?: {
                         code: "custom",
                         message: conformZodMessage.VALIDATION_UNDEFINED,
                         fatal: true,
-                    })
+                    });
+                    return;
                 }
+
+                return options.isUsernameUnique().then((isUnique) => {
+                    if (!isUnique) {
+                        ctx.addIssue({
+                            code: "custom",
+                            message: "Username is already taken.",
+                        });
+                    }
+                });
             })
-        )
+        ),
+        fullName: z.string().min(3).max(150),
     })
 }

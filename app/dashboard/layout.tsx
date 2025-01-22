@@ -17,7 +17,24 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { requireUser } from "../lib/hooks";
 import { signOut } from "../lib/auth";
+import prisma from "../lib/db";
+import { redirect } from "next/navigation";
 
+
+async function getData(userID: string) {
+  const data = await prisma.user.findUnique({
+    where: {
+      id: userID,
+    },
+    select: {
+      userName: true,
+    }
+  });
+
+  if(!data?.userName) {
+    return redirect("/onboarding");
+  }
+}
 
 export default async function DashboardLayout({
   children,
@@ -25,6 +42,7 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   const session = await requireUser();
+  const data = await getData(session.user?.id as string);
 
   return (
     <>
