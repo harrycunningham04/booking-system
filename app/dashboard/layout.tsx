@@ -19,6 +19,7 @@ import { requireUser } from "../lib/hooks";
 import { signOut } from "../lib/auth";
 import prisma from "../lib/db";
 import { redirect } from "next/navigation";
+import { Toaster } from "@/components/ui/sonner";
 
 
 async function getData(userID: string) {
@@ -28,11 +29,16 @@ async function getData(userID: string) {
     },
     select: {
       userName: true,
+      grantId: true
     }
   });
 
   if(!data?.userName) {
     return redirect("/onboarding");
+  }
+
+  if(!data?.grantId) {
+    return redirect("/onboarding/grant-id");
   }
 }
 
@@ -131,6 +137,7 @@ export default async function DashboardLayout({
           </main>
         </div>
       </div>
+      <Toaster richColors closeButton />
     </>
   );
 }
