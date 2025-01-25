@@ -4,10 +4,15 @@ import { requireUser } from "../lib/hooks";
 import { EmptyState } from "../components/EmptyState";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Settings, Users2 } from "lucide-react";
+import { ExternalLink, Link2, Pen, Settings, Trash, Users2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
   DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -75,10 +80,42 @@ export default async function Dashboard() {
                 <div className="absolute top-2 right-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button>
+                      <Button variant="outline" size="icon">
                         <Settings className="size-4" />
                       </Button>
                     </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+
+                      <DropdownMenuLabel>Event</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/${data.userName}/${item.url}`}>
+                            <ExternalLink className="mr-2 size-4" />
+                            Preview
+                          </Link>
+                        </DropdownMenuItem>
+
+                        <DropdownMenuItem>
+                          <Link2 className="mr-2 size-4" />
+                          Copy
+                        </DropdownMenuItem>
+
+                        <DropdownMenuItem>
+                          <Pen className="mr-2 size-4" />
+                          Edit
+                        </DropdownMenuItem>
+
+                      </DropdownMenuGroup>
+
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <Trash className="mr-2 size-4" />
+                        Delete
+                      </DropdownMenuItem>
+
+                    </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
 
