@@ -40,6 +40,20 @@ export default async function AvailabilityRoute() {
   const session = await requireUser();
   const data = await getData(session.user?.id as string);
 
+  const dayOrder = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const sortedData = data.sort(
+    (a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day)
+  );
+
   return (
     <Card>
       <CardHeader>
@@ -50,14 +64,17 @@ export default async function AvailabilityRoute() {
       </CardHeader>
       <form action={updateAvailabilityAction}>
         <CardContent className="flex flex-col gap-y-4">
-          {data.map((item) => (
+          {sortedData.map((item) => (
             <div
               key={item.id}
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4"
             >
               <input type="hidden" name={`id-${item.id}`} value={item.id} />
               <div className="flex items-center gap-x-3">
-                <Switch name={`isActive-${item.id}`} defaultChecked={item.isActive} />
+                <Switch
+                  name={`isActive-${item.id}`}
+                  defaultChecked={item.isActive}
+                />
                 <p>{item.day}</p>
               </div>
 

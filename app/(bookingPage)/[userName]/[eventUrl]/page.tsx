@@ -1,4 +1,5 @@
 import { RenderCalendar } from "@/app/components/bookingForm/RenderCalendar";
+import { TimeTable } from "@/app/components/bookingForm/TimeTable";
 import prisma from "@/app/lib/db";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -110,7 +111,7 @@ const BookingPage = async ({
 
           <Separator orientation="vertical" className="h-full w-[1px]" />
 
-          
+          <TimeTable selectedDate={selectedDate} userName={params.userName} />
         </CardContent>
       </Card>
     </div>
