@@ -74,6 +74,11 @@ const BookingPage = async ({
         <Card className="max-w-[600px]">
           <CardContent className="p-5 grid md:grid-cols-[1fr,auto,1fr] gap-4">
             <div>
+              <img
+                src={eventType.User?.image || ""}
+                alt="User Profile"
+                className="size-10 rounded-full"
+              />
               <p className="text-sm font-medium text-muted-foreground mt-1">
                 {eventType.User?.name}
               </p>
@@ -108,7 +113,6 @@ const BookingPage = async ({
               className="hidden md:block h-full w-[1px]"
             />
 
-
             <form
               className="flex flex-col gap-y-4"
               action={createMeetingAction}
@@ -134,7 +138,6 @@ const BookingPage = async ({
 
               <SubmitButton text="Book Meeting" />
             </form>
-
           </CardContent>
         </Card>
       ) : (
@@ -150,19 +153,19 @@ const BookingPage = async ({
               </p>
               <div className="mt-5 grid gap-y-3">
                 <p className="flex items-center">
-                  <CalendarX2 className="size-4 mr-2 text-primary" />
+                  <CalendarX2 className="w-4 h-4 mr-2 text-primary" />
                   <span className="text-sm font-medium text-muted-foreground">
                     {formattedDate}
                   </span>
                 </p>
                 <p className="flex items-center">
-                  <Clock className="size-4 mr-2 text-primary" />
+                  <Clock className="w-4 h-4 mr-2 text-primary" />
                   <span className="text-sm font-medium text-muted-foreground">
                     {eventType.duration} Mins
                   </span>
                 </p>
                 <p className="flex items-center">
-                  <BookMarked className="size-4 mr-2 text-primary" />
+                  <BookMarked className="w-4 h-4 mr-2 text-primary" />
                   <span className="text-sm font-medium text-muted-foreground">
                     Google Meet
                   </span>
@@ -172,7 +175,9 @@ const BookingPage = async ({
 
             <Separator orientation="vertical" className="h-full w-[1px]" />
 
-            <RenderCalendar availability={eventType.User?.availability as any} />
+            <RenderCalendar
+              availability={eventType.User?.availability as any}
+            />
 
             <Separator orientation="vertical" className="h-full w-[1px]" />
 

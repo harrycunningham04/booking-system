@@ -1,5 +1,5 @@
 "use client";
-import { CreateEventTypeAction, EditEventTypeAction } from "@/app/actions";
+import { EditEventTypeAction } from "@/app/actions";
 import { SubmitButton } from "@/app/components/SubmitButtons";
 import { eventTypeSchema } from "@/app/lib/zodSchemas";
 import { Button } from "@/components/ui/button";
